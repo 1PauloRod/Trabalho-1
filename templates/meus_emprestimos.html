@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Meus Empréstimos</h1>
+
+<a href="{% url 'home' %}">Voltar para Home</a>
+<br><br>
+
+<ul>
+  {% for emprestimo in emprestimos %}
+    <li>
+      {{ emprestimo.livro.titulo }} - {{ emprestimo.livro.autor }} 
+      | Emprestado em: {{ emprestimo.data_emprestimo }}
+      {% if not emprestimo.data_devolucao %}
+            <strong>Ativo</strong>
+            <form method="post" action="{% url 'devolver_livro' emprestimo.livro.pk %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Devolver</button>
+            </form>
+        
+      {% else %}
+        | Devolvido em: {{ emprestimo.data_devolucao }}
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>Você não possui livros emprestados.</li>
+  {% endfor %}
+</ul>
+</body>
+</html>

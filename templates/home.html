@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    esta é a pagina de home
+    
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+<br>
+{% if user.is_staff or user.is_superuser %}
+    
+    <h1>Bem vindo, Admin</h1>
+    <ul>
+        <li><a href="{% url 'lista_livros_admin' %}">Gerenciar Livros</a></li>
+        <li><a href="#">Gerenciar Usuários</a></li>
+    
+    </ul>
+
+
+  {% else %}
+  
+    <h1>Bem vindo, {{ user.first_name }}</h1>
+
+    <a href="{% url 'meus_emprestimos' %}">Meus Empréstimos</a>
+
+    <br><br>
+
+    <form method="get">
+        <input type="text" name="q" placeholder="Digite o título">
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    <ul>
+    {% for livro in livros %}
+        <li>
+        {{ livro.titulo }} - {{ livro.autor }}
+        
+        {% if livro.disponivel %}
+            <form method="post" action="{% url 'emprestar_livro' livro.pk %}">
+            {% csrf_token %}
+            <button type="submit">Alugar</button>
+            </form>
+        {% else %}
+            <span style="color:red;">(Indisponível)</span>
+        {% endif %}
+
+        </li>
+    {% empty %}
+        <li>Nenhum livro encontrado.</li>
+    {% endfor %}
+    </ul>
+
+  {% endif %}
+</body>
+</html>

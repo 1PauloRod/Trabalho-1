@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <a href="{% url 'home' %}">Voltar</a>
+    <br>
+    <br>
+
+    <form method="get">
+        <input type="text" name="q" placeholder="Digite o título">
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    <a href="{% url 'adiciona_livro_admin' %}">adicionar livro</a>
+
+
+    <ul>
+    {% if livros %}
+        {% for livro in livros %}
+        <li>
+            {{ livro.titulo }} - {{ livro.autor }} - {{ livro.ano }} - {{ livro.disponivel }} <a href="{% url 'atualiza_livro_admin' livro.pk %}">Atualizar</a> 
+            <form method="post" action="{% url 'deleta_livro_admin' livro.pk %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Deletar</button>
+            </form>
+        </li>
+        {% endfor %}
+    {% else %}
+        <li>Sem livros da base de dados.</li>
+    {% endif %}
+    </ul>
+</body>
+</html>
