@@ -36,7 +36,7 @@ O site foi projetado para ser publicado em servidor web (PythonAnywhere) e pode 
 - **livros/** - Gerencia CRUD de livros e empréstimos.
 - **templates/** - Templates HTML do site.
 - **static/** - Arquivos CSS.
-- **db.sqlite3** - Banco de dados SQLite (não enviado no repositório público, configurar localmente).
+- **db.sqlite3** - Banco de dados SQLite.
 - **Dockerfile** (opcional) - Para criar container do projeto.
 
 ---
@@ -107,6 +107,13 @@ http://127.0.0.1:8000/
 
 - O envio de e-mail de recuperação requer configuração válida do servidor SMTP (Hotmail, Gmail, etc.).  
 - Gerenciador de usuários por meio do superuser/moderador
+
+---
+
+## Deploy no Python Anywhere
+
+pip install --user pythonanywhere
+pa_autoconfigure_django.py https://github.com/1PauloRod/Trabalho-1.git --python=3.10
 
 
 
