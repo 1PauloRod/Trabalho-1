@@ -1,16 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" style="css/text" href="{% static 'css/welcome.css' %}">
 </head>
 <body>
+    <div class="main-content">
+        <div class="left-content">
+            <div class="main-image">
+                <img src="{% static 'img/astronaut.png' %}" alt="astronaut logo">
+            </div>
+        </div>
+        <div class="right-content">
+            <h1>Biblioteca Digital – INF1407</h1>
+            <p>Plataforma web para gerenciar acervo de livros: cadastro, busca, empréstimos e devoluções com acesso controlado por usuário.</p>
+            <div class="right-content-buttons">
+                <a href="{% url 'register' %}">Cadastro</a>
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+        </div>
+    </div>
 
-    Esta é a pagina de welcome!
-    <br>
-    <a href="{% url 'register' %}">cadastro</a>
-    <br>
-    <a href="{% url 'login' %}">login</a>
 </body>
 </html>
